@@ -75,13 +75,15 @@ class TestCalculator {
 		assertEquals(-13, Calculator.divide(-26, 2));
 		assertEquals(-10, Calculator.divide(30, -3));
 		assertEquals(0, Calculator.divide(0, 24));
-		assertEquals(Double.POSITIVE_INFINITY, Calculator.divide(93, 0));
-		assertEquals(Double.NaN, Calculator.divide(0, 0));
-		assertEquals(Double.POSITIVE_INFINITY, Calculator.divide(33, -0));
 		assertEquals(11, Calculator.divide(24.2, 2.2), 0.001);
 		assertEquals(-11.1, Calculator.divide(33.3, -3), 0.001);
 		assertEquals(3, Calculator.divide(-99, -33));
+		
+		// test for unique cases
 		//Double.NEGATIVE_INFINITY
+		assertEquals(Double.POSITIVE_INFINITY, Calculator.divide(93, 0));
+		assertEquals(Double.NaN, Calculator.divide(0, 0));
+		assertEquals(Double.POSITIVE_INFINITY, Calculator.divide(33, -0));
 	}
 
 	@Test
@@ -93,6 +95,7 @@ class TestCalculator {
 		assertEquals(-17, Calculator.average(-66, -17, 40, -69,25), 0.1);
 		assertEquals(0, Calculator.average(0, 1, 0, 0), 0.1);
 		
+		// test for null		
         Exception testNull = assertThrows(NullPointerException.class, () ->
         Calculator.average(null));
         assertEquals(null, testNull.getMessage());
@@ -106,18 +109,24 @@ class TestCalculator {
 		assertEquals(11.1, Calculator.median(12, 74, 3, 0.1, 10.2, 28.2), 0.01);
 		assertEquals(23.3, Calculator.median(88, 0, 23.3, 4.9, 0.0, 29, 74));
 		assertEquals(53.435, Calculator.median(44.4, 29.9, 62.47, 81.1), 0.01);
+		assertEquals(11.4, Calculator.median(23.1, -14.7, -0.3, 25.2, 900, -14.2), 0.01);
+		assertEquals(-22.1, Calculator.median(-22.1, -13, -88.2, -1.1, -35));
 
+		// test for null
         Exception testNull = assertThrows(NullPointerException.class, () ->
         Calculator.median(null));
         assertEquals(null, testNull.getMessage());
 	}
 
 	@Test
+	@DisplayName("Find the maximum")
 	void testMax() {
-		//
-		//
-		//
-		//
+		assertEquals(87, Calculator.max(69, 7, 42, 12, 87, 25));
+		assertEquals(7, Calculator.max(-69, -72, -421, -8698, 7));
+		assertEquals(420, Calculator.max(420, 0, 0, 0, 0, -430, 84));
+		assertEquals(0.5, Calculator.max(0.0, 0, 0.1, 0.5, -0.3, -0.9));
+		assertEquals(-0.9, Calculator.max(-211.3, -90, -320.3, -44.2, -0.9));
+
 		// test for null
         Exception testNull = assertThrows(NullPointerException.class, () ->
         Calculator.median(null));
@@ -125,11 +134,13 @@ class TestCalculator {
 	}
 	
 	@Test
+	@DisplayName("Find the minimum")
 	void testMin() {
-		//
-		//
-		//
-		//
+		assertEquals(-10001, Calculator.min(9, 24, 0, -23, 900, -10001));
+		assertEquals(-0.2, Calculator.min(0.0, 0.1, -0.1, -0.2, 0.2));
+		assertEquals(1, Calculator.min(1, 2, 3, 44, 55, 66));
+		assertEquals(0, Calculator.min(0, 0, 0, 0, 0.1));
+
 		// test for null
         Exception testNull = assertThrows(NullPointerException.class, () ->
         Calculator.median(null));
