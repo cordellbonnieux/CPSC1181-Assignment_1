@@ -68,11 +68,11 @@ public class Calculator {
 	 * @return A double, which is the average of all values (parameters)
 	 */
 	public static int average(double... values) {
-		int sum = 0;
+		double sum = 0.0;
 		for (double n : values) {
 			sum += n;
 		}
-		return sum / values.length;
+		return (int)sum / values.length;
 	}
 	
 	/**
@@ -84,12 +84,15 @@ public class Calculator {
 	 * there is no single middle value; the median is then usually
 	 * defined to be the mean of the two middle values
 	 * @param values A variable amount of doubles
-	 * @return the median value (a double) from the list of parameters (values)
+	 * @return the median value (a double) from the list of parameters (values) OR the mean of the two middle items
 	 */
 	public static double median(double... values) {
 		Arrays.sort(values);
-		return values[values.length / 2];
-
+		if (values.length % 2 == 0) {
+			return (values[values.length / 2] + values[(values.length - 1) / 2]) / 2;
+		} else {
+			return values[(values.length - 1) / 2];
+		}
 	}
 
 	/**
